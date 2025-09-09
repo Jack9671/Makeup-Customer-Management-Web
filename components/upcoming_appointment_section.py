@@ -170,10 +170,9 @@ def upcoming_appointment_section(df):
                         "Địa Chỉ",
                         required=True,
                     ),
-                    "số_điện_thoại": st.column_config.NumberColumn(
+                    "số_điện_thoại": st.column_config.TextColumn(
                         "Số Điện Thoại",
-                        format="%d",
-                        required=True
+                        required=True,
                     ),
                     "tiền_cọc": st.column_config.NumberColumn(
                         "Tiền Cọc",
