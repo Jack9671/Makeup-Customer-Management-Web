@@ -145,7 +145,7 @@ def upcoming_appointment_section(df):
                 st.metric("Số khách Pass", f"{passed_count} trên {total_customers} người")
 
             st.write("### Chi tiết:")
-            st.data_editor(
+            st.dataframe(
                 display_df, 
                 use_container_width=True, 
                 column_config={
