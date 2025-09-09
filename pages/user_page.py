@@ -331,11 +331,14 @@ def user_page():
                     new_rows_for_insert = new_rows.drop(columns=['customer_id'])
                     new_rows_dict = new_rows_for_insert.to_dict('records')
                     
-                    # Convert pandas Timestamp objects to ISO format strings for JSON serialization
+                    # Convert data types and handle datetime serialization
                     for record in new_rows_dict:
                         for key, value in record.items():
                             if pd.api.types.is_datetime64_any_dtype(type(value)) or isinstance(value, pd.Timestamp):
                                 record[key] = value.isoformat() if pd.notna(value) else None
+                            elif key in numeric_fields and pd.notna(value):
+                                # Convert float to int for numeric fields
+                                record[key] = int(float(value))
                     
                     insert_response = supabase.table("customers").insert(new_rows_dict).execute()
                     if insert_response.data:
@@ -347,10 +350,13 @@ def user_page():
                         customer_id = int(row['customer_id'])
                         update_data = row.drop(['customer_id']).to_dict()
                         
-                        # Convert pandas Timestamp objects to ISO format strings for JSON serialization
+                        # Convert data types and handle datetime serialization
                         for key, value in update_data.items():
                             if pd.api.types.is_datetime64_any_dtype(type(value)) or isinstance(value, pd.Timestamp):
                                 update_data[key] = value.isoformat() if pd.notna(value) else None
+                            elif key in numeric_fields and pd.notna(value):
+                                # Convert float to int for numeric fields
+                                update_data[key] = int(float(value))
                         
                         update_response = supabase.table("customers").update(update_data).eq("customer_id", customer_id).execute()
                     
