@@ -296,7 +296,7 @@ def user_page():
             for idx, phone in edited_df['số_điện_thoại'].items():
                 if pd.notna(phone) and phone != '':
                     phone_str = str(phone).strip()
-                    if not phone_str.isdigit() o:
+                    if not phone_str.isdigit(): # checks if phone contains only digits
                         has_invalid_phone = True
                         break
         
