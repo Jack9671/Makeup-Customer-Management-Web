@@ -14,14 +14,14 @@ def create_customers_table():
                 tuổi           integer CHECK (tuổi > 0 AND tuổi <= 120),
                 địa_chỉ  text NOT NULL,
                 thời_gian timestamp NOT NULL,
-                số_điện_thoại  integer NOT NULL,
-                tiền_cọc       integer DEFAULT 0 CHECK (tiền_cọc >= 0),
-                tiền_còn_lại   integer DEFAULT 0 CHECK (tiền_còn_lại >= 0),
-                tiền_tổng      integer DEFAULT 0 CHECK (tiền_tổng >= 0),
-                pass           BOOLEAN DEFAULT FALSE,
-                makeup_tone    text DEFAULT 'Natural',
-                created_at     timestamptz DEFAULT now(),
-                updated_at     timestamptz DEFAULT now()
+                số_điện_thoại  text NOT NULL,
+                tiền_cọc       integer DEFAULT 0 CHECK (tiền_cọc >= 0) NOT NULL,
+                tiền_còn_lại   integer DEFAULT 0 CHECK (tiền_còn_lại >= 0) NOT NULL,
+                tiền_tổng      integer DEFAULT 0 CHECK (tiền_tổng >= 0) NOT NULL,
+                pass           BOOLEAN DEFAULT FALSE NOT NULL,
+                makeup_tone    text DEFAULT 'Natural' NOT NULL,
+                created_at     timestamptz DEFAULT now() NOT NULL,
+                updated_at     timestamptz DEFAULT now() NOT NULL
             );
 
             -- 2️⃣ Index for the RLS condition (optional but recommended)
@@ -78,14 +78,14 @@ def create_customers_table():
                 địa_chỉ  text NOT NULL,
                 ngày date NOT NULL,
                 thời_gian timestamp NOT NULL,
-                số_điện_thoại  integer NOT NULL,
-                tiền_cọc       integer DEFAULT 0 CHECK (tiền_cọc >= 0),
-                tiền_còn_lại   integer DEFAULT 0 CHECK (tiền_còn_lại >= 0),
-                tiền_tổng      integer DEFAULT 0 CHECK (tiền_tổng >= 0),
-                pass           BOOLEAN DEFAULT FALSE,
-                makeup_tone    text DEFAULT 'Natural',
-                created_at     timestamptz DEFAULT now(),
-                updated_at     timestamptz DEFAULT now()
+                số_điện_thoại  text NOT NULL,
+                tiền_cọc       integer DEFAULT 0 CHECK (tiền_cọc >= 0) NOT NULL,
+                tiền_còn_lại   integer DEFAULT 0 CHECK (tiền_còn_lại >= 0) NOT NULL,
+                tiền_tổng      integer DEFAULT 0 CHECK (tiền_tổng >= 0) NOT NULL,
+                pass           BOOLEAN DEFAULT FALSE NOT NULL,
+                makeup_tone    text DEFAULT 'Natural' NOT NULL,
+                created_at     timestamptz DEFAULT now() NOT NULL,
+                updated_at     timestamptz DEFAULT now() NOT NULL
             );
 
             -- Index for better performance

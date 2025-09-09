@@ -215,8 +215,6 @@ def user_page():
                 ),
                 "số_điện_thoại": st.column_config.TextColumn(
                     "Số Điện Thoại",
-                    help="Nhập số điện thoại 10 chữ số",
-                    max_chars=10,
                     required=True,
                 ),
                 "tiền_cọc": st.column_config.NumberColumn(
@@ -298,7 +296,7 @@ def user_page():
             for idx, phone in edited_df['số_điện_thoại'].items():
                 if pd.notna(phone) and phone != '':
                     phone_str = str(phone).strip()
-                    if not phone_str.isdigit() or len(phone_str) != 10:
+                    if not phone_str.isdigit() o:
                         has_invalid_phone = True
                         break
         
@@ -306,7 +304,7 @@ def user_page():
             st.warning(f"⚠️ **Cảnh báo:** Vui lòng điền đầy đủ các trường bắt buộc trước khi lưu thay đổi. Các trường còn thiếu: {', '.join(empty_fields)}")
             update_button_disabled = True
         elif has_invalid_phone:
-            st.warning("⚠️ **Cảnh báo:** Số điện thoại phải là 10 chữ số. Vui lòng kiểm tra lại.")
+            st.warning("⚠️ **Cảnh báo:** Vui lòng kiểm tra lại định dạng Số Điện Thoại. Số điện thoại chỉ nên bao gồm chữ số và không chứa ký tự đặc biệt hoặc khoảng trắng.")
             update_button_disabled = True
         else:
             update_button_disabled = False
@@ -357,9 +355,6 @@ def user_page():
                             elif key in numeric_fields and pd.notna(value):
                                 # Convert float to int for numeric fields
                                 record[key] = int(float(value))
-                            elif key == 'số_điện_thoại' and pd.notna(value):
-                                # Handle phone number as string but convert to int for database storage
-                                record[key] = int(str(value).strip())
                     
                     insert_response = supabase.table("customers").insert(new_rows_dict).execute()
                     if insert_response.data:
@@ -378,9 +373,7 @@ def user_page():
                             elif key in numeric_fields and pd.notna(value):
                                 # Convert float to int for numeric fields
                                 update_data[key] = int(float(value))
-                            elif key == 'số_điện_thoại' and pd.notna(value):
-                                # Handle phone number as string but convert to int for database storage
-                                update_data[key] = int(str(value).strip())
+                                
                         
                         update_response = supabase.table("customers").update(update_data).eq("customer_id", customer_id).execute()
                     
