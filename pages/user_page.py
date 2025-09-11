@@ -73,9 +73,12 @@ def user_page():
                 
                 pct_change_customers = ((total_customers_after - total_customers_before) / total_customers_before * 100) if total_customers_before > 0 else 0
                 pct_change_income = ((total_income_after - total_income_before) / total_income_before * 100) if total_income_before > 0 else 0
-
-                st.markdown(f"Thu nhập {num_of_units} {date_option} gần đây: <span style='color: #1f77b4; font-size: 18px; font-weight: bold;'>{total_income_after:,}k VND</span>", unsafe_allow_html=True)
-                st.markdown(f"Thu nhập {num_of_units} {date_option} trước đó: <span style='color: #1EB5C9; font-size: 16px; font-weight: bold;'>{total_income_before:,}k VND</span>", unsafe_allow_html=True)
+                if date_option == "ngày" and num_of_units == 1:
+                    st.markdown(f"Thu nhập ngày hôm nay : <span style='color: #1f77b4; font-size: 18px; font-weight: bold;'>{total_income_after:,}k VND</span>", unsafe_allow_html=True)
+                    st.markdown(f"Thu nhập ngày hôm qua: <span style='color: #1EB5C9; font-size: 16px; font-weight: bold;'>{total_income_before:,}k VND</span>", unsafe_allow_html=True)
+                else:
+                    st.markdown(f"Thu nhập {num_of_units} {date_option} gần đây: <span style='color: #1f77b4; font-size: 18px; font-weight: bold;'>{total_income_after:,}k VND</span>", unsafe_allow_html=True)
+                    st.markdown(f"Thu nhập {num_of_units} {date_option} trước đó: <span style='color: #1EB5C9; font-size: 16px; font-weight: bold;'>{total_income_before:,}k VND</span>", unsafe_allow_html=True)
 
                 if pct_change_income > 0:
                     st.success(f"Tăng **{pct_change_income:.1f}%** so với trước đó")
@@ -85,9 +88,12 @@ def user_page():
                     pass
                 
                 st.divider()
-
-                st.markdown(f"Số khách hàng {num_of_units} {date_option} gần đây: <span style='color: #ff7f0e; font-size: 18px; font-weight: bold;'>{total_customers_after} người</span>", unsafe_allow_html=True)
-                st.markdown(f"Số khách hàng {num_of_units} {date_option} trước đó: <span style='color: #1EB5C9; font-size: 16px; font-weight: bold;'>{total_customers_before} người</span>", unsafe_allow_html=True)
+                if date_option == "ngày" and num_of_units == 1:
+                    st.markdown(f"Số khách hàng ngày hôm nay: <span style='color: #ff7f0e; font-size: 18px; font-weight: bold;'>{total_customers_after} người</span>", unsafe_allow_html=True)
+                    st.markdown(f"Số khách hàng ngày hôm qua: <span style='color: #1EB5C9; font-size: 16px; font-weight: bold;'>{total_customers_before} người</span>", unsafe_allow_html=True)
+                else:     
+                    st.markdown(f"Số khách hàng {num_of_units} {date_option} gần đây: <span style='color: #ff7f0e; font-size: 18px; font-weight: bold;'>{total_customers_after} người</span>", unsafe_allow_html=True)
+                    st.markdown(f"Số khách hàng {num_of_units} {date_option} trước đó: <span style='color: #1EB5C9; font-size: 16px; font-weight: bold;'>{total_customers_before} người</span>", unsafe_allow_html=True)
 
                 if pct_change_customers > 0:
                     st.success(f"Tăng **{pct_change_customers:.1f}%** so với trước đó")
