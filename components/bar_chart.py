@@ -25,7 +25,6 @@ def bar_chart(df_filtered: pd.DataFrame, x_axis_option: str, y_axis_option: str)
     fig = px.bar(df_grouped, x='period', y=df_grouped.columns[1], 
                  labels={'period': 'Thời Gian', df_grouped.columns[1]: y_label}, 
                  title=f"{y_label} theo {x_axis_option}")
-
     fig.update_layout(xaxis_title='Thời Gian', yaxis_title=y_label)
     if x_axis_option == "ngày" or x_axis_option == "tuần":
         fig.update_xaxes(tickformat='%d/%m/%Y')

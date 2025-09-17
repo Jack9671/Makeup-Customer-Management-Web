@@ -111,7 +111,7 @@ def view_user_data(user_id):
             df = pd.DataFrame(response.data)
             # Reorder columns for better display
             column_order = ["customer_id", "tên", "tuổi", "số_điện_thoại", "địa_chỉ", 
-                          "ngày", "thời_gian", "tiền_cọc", "tiền_còn_lại", "tiền_tổng", 
+                          "thời_gian", "tiền_cọc", "tiền_còn_lại", "tiền_tổng", 
                           "pass", "makeup_tone", "created_at", "updated_at"]
             df = df[column_order]
             st.dataframe(df, use_container_width=True)
@@ -160,7 +160,7 @@ def view_all_customers():
             
             # Reorder columns
             column_order = ["customer_id", "user_email", "tên", "tuổi", "số_điện_thoại", 
-                          "địa_chỉ", "ngày", "thời_gian", "tiền_cọc", "tiền_còn_lại", 
+                          "địa_chỉ", "thời_gian", "tiền_cọc", "tiền_còn_lại", 
                           "tiền_tổng", "pass", "makeup_tone", "created_at"]
             df = df[column_order]
             
@@ -226,4 +226,5 @@ def show_admin_dashboard():
     with tab3:
         manage_users()
         '''
+    return
 

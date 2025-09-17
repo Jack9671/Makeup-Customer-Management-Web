@@ -149,6 +149,7 @@ def upcoming_appointment_section(df):
                 display_df, 
                 use_container_width=True, 
                 column_config={
+    
                     "thời_gian": st.column_config.DatetimeColumn(
                         "Thời Gian",
                         format="DD/MM/YYYY, HH:mm",
@@ -196,39 +197,19 @@ def upcoming_appointment_section(df):
                         "Pass",
                         required=True
                     ),
-
                     "makeup_tone": st.column_config.SelectboxColumn(
                         "Tone Makeup",
-                        options= ["Hồng đào",
-                                "Hồng cánh sen",
-                                "Hồng đất",
-                                "Hồng nude",
-                                "Hồng cam",
-                                "Cam đào",
-                                "Cam san hô",
-                                "Cam cháy",
-                                "Cam đất",
-                                "Cam nude",
-                                "Nâu đất",
-                                "Nâu cam đất",
-                                "Nâu đỏ gạch",
-                                "Nude đất",
-                                "Mocha",
-                                "Chocolate",
-                                "Đỏ tươi",
-                                "Đỏ cam",
-                                "Đỏ hồng",
-                                "Đỏ rượu vang",
-                                "Đỏ đất",
-                                "Tím pastel",
-                                "Tím hồng",
-                                "Tím mận",
-                                "Tím rượu vang",
-                                "Nude hồng",
-                                "Nude cam",
-                                "Nude be"
+                        options= [
+                            "Hồng nhẹ",
+                            "Hồng đỏ",
+                            "Hồng Khói",
+                            "Cam đất",
+                            "Neutral",
+                            "Natural",
+                            "Nude",
+                            "Chưa biết"
                             ],
-                        default="Hồng đào",
+                        default="Chưa biết",
                         required=True
                     ), 
                 }, 
