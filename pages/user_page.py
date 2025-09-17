@@ -54,15 +54,19 @@ def user_page():
             with col:
                 st.subheader(f"{date_option.capitalize()}")
                 today = datetime.now()
+                #st.write(f"Ngày hiện tại: {today.strftime('%d/%m/%Y')}")
                 today = today.replace(hour=0, minute=0, second=0, microsecond=0)
                 days_multiplier = time_multipliers[date_option]
                 
                 first_date_of_end_period = today - pd.Timedelta(days=num_of_units * days_multiplier)
+                if date_option == "ngày": #then plus 1 day to include today
+                    first_date_of_end_period += pd.Timedelta(days=1)
+
+                #st.write(f"first_date_of_end_period: {first_date_of_end_period.strftime('%d/%m/%Y')}")
                 first_date_of_start_period = first_date_of_end_period - pd.Timedelta(days=num_of_units * days_multiplier)
-                
-                mask_from_first_date_of_end_period = df['thời_gian'] >= first_date_of_end_period 
+                #st.write(f"first_date_of_start_period: {first_date_of_start_period.strftime('%d/%m/%Y')}")
+                mask_from_first_date_of_end_period = (df['thời_gian'] >= first_date_of_end_period) & (df['thời_gian'] <= today)
                 mask_from_first_date_of_start_period = (df['thời_gian'] >= first_date_of_start_period) & (df['thời_gian'] < first_date_of_end_period)
-                
                 df_before = df[mask_from_first_date_of_start_period]
                 df_after = df[mask_from_first_date_of_end_period]
                 
@@ -73,7 +77,7 @@ def user_page():
                 
                 pct_change_customers = ((total_customers_after - total_customers_before) / total_customers_before * 100) if total_customers_before > 0 else 0
                 pct_change_income = ((total_income_after - total_income_before) / total_income_before * 100) if total_income_before > 0 else 0
-                if date_option == "ngày" and num_of_units == 1:
+                if date_option == "ngày" and num_of_units == 0:
                     st.markdown(f"Thu nhập ngày hôm nay : <span style='color: #1f77b4; font-size: 18px; font-weight: bold;'>{total_income_after:,}k VND</span>", unsafe_allow_html=True)
                     st.markdown(f"Thu nhập ngày hôm qua: <span style='color: #1EB5C9; font-size: 16px; font-weight: bold;'>{total_income_before:,}k VND</span>", unsafe_allow_html=True)
                 else:
@@ -88,7 +92,7 @@ def user_page():
                     pass
                 
                 st.divider()
-                if date_option == "ngày" and num_of_units == 1:
+                if date_option == "ngày" and num_of_units == 0:
                     st.markdown(f"Số khách hàng ngày hôm nay: <span style='color: #ff7f0e; font-size: 18px; font-weight: bold;'>{total_customers_after} người</span>", unsafe_allow_html=True)
                     st.markdown(f"Số khách hàng ngày hôm qua: <span style='color: #1EB5C9; font-size: 16px; font-weight: bold;'>{total_customers_before} người</span>", unsafe_allow_html=True)
                 else:     
