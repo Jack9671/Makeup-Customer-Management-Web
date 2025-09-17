@@ -243,11 +243,11 @@ def user_page():
                 ),
                 "pass": st.column_config.CheckboxColumn(
                     "Pass",
-                    required=True
+                    default=False
                 ),
                 "makeup_tone": st.column_config.TextColumn(
                     "Tone Makeup",
-                    required=True
+                    required =True
                 ),
             },
             hide_index=True,
