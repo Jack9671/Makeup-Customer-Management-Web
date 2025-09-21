@@ -207,6 +207,8 @@ def upcoming_appointment_section(df):
                             "Neutral",
                             "Natural",
                             "Nude",
+                            "Khói",
+                            "Thái Lan",
                             "Chưa biết"
                             ],
                         default="Chưa biết",
